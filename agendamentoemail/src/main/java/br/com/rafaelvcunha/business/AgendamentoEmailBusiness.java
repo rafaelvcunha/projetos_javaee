@@ -1,20 +1,31 @@
 package br.com.rafaelvcunha.business;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
+
+import br.com.rafaelvcunha.dao.AgendamentoEmailDao;
+import br.com.rafaelvcunha.entity.AgendamentoEmail;
 
 @Stateless
 public class AgendamentoEmailBusiness {
 	
-	public List<String> listarAgendamentosEmail(){
+	@Inject
+	private AgendamentoEmailDao agendamentoEmailDao;
+	
+	public List<AgendamentoEmail> listarAgendamentosEmail(){
 		
-		List<String> emails = new ArrayList<>();
+		/*List<String> emails = new ArrayList<>();
 		emails.add("teste1@email.com");
-		emails.add("teste2@email.com");
+		emails.add("teste2@email.com");*/
 		
-		return emails;
+		return agendamentoEmailDao.listarAgendamentosEmail();
+	}
+	
+	public void salvarAgendamentoEmail( AgendamentoEmail agendamentoEmail) {
+		agendamentoEmail.setEnviado(Boolean.FALSE);
+		agendamentoEmailDao.salvarAgendamentoEmail(agendamentoEmail);
 	}
 
 }
